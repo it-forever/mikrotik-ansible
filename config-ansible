@@ -1,0 +1,20 @@
+Readme https://docs.ansible.com/ansible/latest/modules/routeros_command_module.html
+
+Manual for ansible
+Settings /etc/ansible/hosts
+[MyHosts]
+Name_router ansible_network_os=routeros ansible_ssh_port=22 ansible_ssh_user=my_user
+
+Settings playbook, example add address list
+- name: my_site
+  hosts: test
+  serial: 1
+  connection: network_cli
+  remote_user: my_user
+  gather_facts: yes [or no]
+  tasks:
+  - name: add me_site
+    routeros_command:
+     commands:
+       - /ip firewall address-list add address=google.com list=my_site comment=google
+
